@@ -13,13 +13,8 @@ class Controle_Acesso {
 		$permissao = array();
 
 		$permissao['usuario'] = array();
-		$permissao['regiao'] = array();
-		$permissao['materia'] = array();
-		$permissao['responsavel'] = array();
-		$permissao['professor'] = array();
-		$permissao['newsletter'] = array();
-		$permissao['creditos'] = array();
-		$permissao['aula'] = array();
+        $permissao['form'] = array();
+        $permissao['pagamento'] = array();
 
 		$permissao['usuario']['index'] = array(0, 1, 2, 3);
 		$permissao['usuario']['logar'] = array(0, 1, 2, 3);
@@ -35,7 +30,7 @@ class Controle_Acesso {
 		$permissao['form']['cadastro'] = array(1);
 		$permissao['form']['enviarRespostasIcty'] = array(1);
 
-
+        $permissao['pagamento']['pagamento'] = array(0, 1, 2, 3);
 
 		$ci =& get_instance();
 		$controller = $ci->router->class;

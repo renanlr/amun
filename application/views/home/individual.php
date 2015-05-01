@@ -6,8 +6,8 @@
 	<?php if ($status==1) { ?>
 		<div style="text-align:center;">
 			<div class="titulo">Choose one option</div>
-			<button class="btn-custom" style="width: 160px; height: 60px; border-radius: 5px;"><a style="color:white;font-size:17px;" onclick="if (confirm('Você tem certeza que deseja escolher ICTY? Ao confirmar você não poderá mais alterar a opção.')) window.location.replace('<?php echo base_url(); ?>index.php/form/escolherOpcaoIndividual/2');">ICTY</a></button>
-			<button class="btn-custom" style="width: 160px; height: 60px; border-radius: 5px;"><a style="color:white;font-size:17px;" onclick="if (confirm('Você tem certeza que deseja escolher Press Agency? Ao confirmar você não poderá mais alterar a opção.')) window.location.replace('<?php echo base_url(); ?>index.php/form/escolherOpcaoIndividual/3');">Press Agency</a></button>
+			<a style="color:white;font-size:17px;" onclick="if (confirm('Você tem certeza que deseja escolher ICTY? Ao confirmar você não poderá mais alterar a opção.')) window.location.replace('<?php echo base_url(); ?>index.php/form/escolherOpcaoIndividual/2');"><button class="btn-custom" style="width: 160px; height: 60px; border-radius: 5px;">ICTY</button></a>
+			<a style="color:white;font-size:17px;" onclick="if (confirm('Você tem certeza que deseja escolher Press Agency? Ao confirmar você não poderá mais alterar a opção.')) window.location.replace('<?php echo base_url(); ?>index.php/form/escolherOpcaoIndividual/3');"><button class="btn-custom" style="width: 160px; height: 60px; border-radius: 5px;">Press Agency</button></a>
 		</div>
 	<?php } else {?>
 		<div class="titulo">Individual Registration Panel</div>

@@ -34,8 +34,41 @@ class Usuario_Model extends CI_Model {
     }
 
     public function atualizarStatus($id,$status){
-        $this->db->where('idusuario', $id);
-        $dado = array('status' => $status);
-        $this->db->update('usuario', $dado);
+        if($status==2){
+            if(!$this->db->select('qtd_vagas')->qtd_vagas_icty){
+                return FALSE;
+            }
+            else{
+                $this->db->where('idusuario', $id);
+                $dado = array('status' => $status);
+                $this->db->update('usuario', $dado);
+                $this->db->where('id', 1);
+                $qtd = $this->db->get('qtd_vagas')->row()->qtd_vagas_icty;
+                $qtd-=$qtd;
+                $vagas = array('qtd_vagas_icty'=> $qtd);
+                $this->db->update('qtd_vagas',$vagas);
+                return TRUE;
+            }
+        }
+        if($status==3){
+            if(!$this->db->select('qtd_vagas')->qtd_vagas_pa){
+                return FALSE;
+            }
+            else{
+                $this->db->where('idusuario', $id);
+                $dado = array('status' => $status);
+                $this->db->update('usuario', $dado);
+                $this->db->where('id', 1);
+                $qtd = $this->db->get('qtd_vagas')->row()->qtd_vagas_pa;
+                $qtd-=$qtd;
+                $vagas = array('qtd_vagas_icty'=> $qtd);
+                $this->db->update('qtd_vagas',$vagas);
+                return TRUE;
+            }
+        }
+
+
     }
+
+
 }
