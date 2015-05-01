@@ -36,8 +36,7 @@ class Usuario_Model extends CI_Model {
     public function atualizarStatus($id,$status){
         if($status==2){
             $query = $this->db->query("select qtd_vagas_icty from qtd_vagas where id = 1")->result();
-            var_dump($query['0']['qtd_vagas_icty']);exit;
-            if($query==0){
+            if($query['0']->qtd_vagas_icty==0){
                 return FALSE;
             }
             else{
@@ -53,8 +52,8 @@ class Usuario_Model extends CI_Model {
             }
         }
         if($status==3){
-
-            if(($this->db->query("select qtd_vagas_pa from qtd_vagas where id = 1")->result()==0)){
+            $query = $this->db->query("select qtd_vagas_pa from qtd_vagas where id = 1")->result();
+            if($query['0']->qtd_vagas_icty==0){
                 return FALSE;
             }
             else{
