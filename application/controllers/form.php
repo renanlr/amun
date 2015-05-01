@@ -8,8 +8,13 @@ class form extends CI_Controller {
     	$this->load->model('usuario_model');
 
     	if ($novoStatus != 2 || $novoStatus != 3) {
-    		$this->usuario_model->atualizarStatus($this->session->userdata('login_id') ,$novoStatus);
-	    	$this->session->set_userdata('mensagem','Seccess');
+                if($this->usuario_model->atualizarStatus($this->session->userdata('login_id') ,$novoStatus)){
+                    $this->session->set_userdata('mensagem','Seccess');
+                }
+                else {
+                    $this->session->set_userdata('mensagem','Something went wrong');
+                }
+
     	} else {
 	    	$this->session->set_userdata('mensagem','Something went wrong');
 	    }
@@ -47,7 +52,6 @@ class form extends CI_Controller {
    	public function cadastro(){
    		$this->load->model('usuario_model');
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
-
         if ($dados->status == 2) {
         	$this->load->view('form/icty');
         } elseif ($dados->status == 3) {

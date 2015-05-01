@@ -1,7 +1,6 @@
 <?php echo $this->load->view('_inc/header') ?>
 <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.validate.js" ></script>
 
-
 <div class="content-box">
 	<div class="titulo">Registration</div>
 	<?php echo form_open('usuario/cadastrar', 'class="form-professor" enctype="multipart/form-data" id="form"'); ?>
@@ -25,8 +24,12 @@
 			<input name="city" type="text" style="width:200px">
 			<span>State/Province</span>
 			<input name="state" type="text" style="width:200px">
-			<span>Country</span>
-			<input name="country" type="text" style="width:200px">
+			<span>Country</span><br>
+            <select name="country" style="width:200px" form="form">
+                <?php foreach ($paises as $pais) { ?>
+                <option value="<?php echo $pais->id ?>"><?php echo $pais->nome?></option>
+                <?php }?>
+            </select><br>
 			<span>Identification (CPF/passport)</span>
 			<input name="identification" type="text" style="width:200px">
 			<span>Type of registration</span>
