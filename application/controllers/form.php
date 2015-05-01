@@ -40,7 +40,7 @@ class form extends CI_Controller {
 
         	$this->form_model->inserirFormIcty($data);
         	$this->usuario_model->atualizarStatus($this->session->userdata('login_id'),4);
-        	$this->session->set_userdata('mensagem','Seccess, now pay!');
+        	$this->session->set_userdata('mensagem','Great, proceed to payment!');
         	redirect('usuario/home');
         } else {
         	$this->session->set_userdata('mensagem','Something went wrong');

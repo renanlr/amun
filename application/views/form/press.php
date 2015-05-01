@@ -15,7 +15,7 @@
 	</style>
 
 	<div class="content-box">
-		<div class="titulo">ICTY Form</div>
+		<div class="titulo">Press Agency Form</div>
 		
 		<?php echo form_open('form/enviarRespostasIcty', 'enctype="multipart/form-data" id="form"' ) ?>
 			<table>
