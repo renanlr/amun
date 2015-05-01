@@ -7,7 +7,7 @@ class Pagamento extends CI_Controller {
     
 
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
-    public function pagamento(){
+    public function payment(){
         var_dump($this);
     }
     

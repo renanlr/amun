@@ -49,7 +49,7 @@ class form extends CI_Controller {
 
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 
-   	public function cadastro(){
+   	public function cadastroIndividual(){
    		$this->load->model('usuario_model');
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
         if ($dados->status == 2) {

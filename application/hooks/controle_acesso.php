@@ -30,7 +30,7 @@ class Controle_Acesso {
 		$permissao['form']['cadastro'] = array(1);
 		$permissao['form']['enviarRespostasIcty'] = array(1);
 
-        $permissao['pagamento']['pagamento'] = array(0, 1, 2, 3);
+        $permissao['pagamento']['payment'] = array(0, 1, 2, 3);
 
 		$ci =& get_instance();
 		$controller = $ci->router->class;
