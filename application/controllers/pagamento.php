@@ -3,7 +3,7 @@
 class Pagamento extends CI_Controller {
 
 	/// MÉTODOS DE SERVIÇOS ----------------------------------------------------
-    
+
     
 
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------

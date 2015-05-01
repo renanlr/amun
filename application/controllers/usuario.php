@@ -63,6 +63,7 @@ class Usuario extends CI_Controller {
 
     public function cadastrar(){
         $this->load->model('usuario_model');
+
         $data = array(
             'nome' => $this->input->post('name'),
             'sobrenome' => $this->input->post('surName'),
@@ -73,7 +74,7 @@ class Usuario extends CI_Controller {
             'cep' => $this->input->post('zip'),
             'cidade' => $this->input->post('city'),
             'estado' => $this->input->post('state'),
-            'pais' => $this->input->post('country'),
+            'lista_paises_id' => $this->input->post('country'),
             'identification' => $this->input->post('identification'),
             'tipo' => $this->input->post('tipo'),
             'status' => 1
@@ -116,7 +117,9 @@ class Usuario extends CI_Controller {
     }
 
     public function cadastro() {
-        $this->load->view('usuario/cadastro');
+        $this->load->model('pais_model');
+        $dados['paises'] = $this->pais_model->buscarPaises()->result();
+        $this->load->view('usuario/cadastro',$dados);
     }
         
 }

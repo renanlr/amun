@@ -47,7 +47,6 @@ class form extends CI_Controller {
    	public function cadastro(){
    		$this->load->model('usuario_model');
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
-
         if ($dados->status == 2) {
         	$this->load->view('form/icty');
         } elseif ($dados->status == 3) {
