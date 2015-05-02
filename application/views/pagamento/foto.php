@@ -1,5 +1,5 @@
 <?php echo $this->load->view('_inc/header') ?>
-    <span>Valor: <?php echo 'a' ?> </span>
+    <span>Valor: <?php echo $valor ?> </span>
 
     <?php echo form_open('usuario/cadastrar', 'class="form-professor" enctype="multipart/form-data" id="form"'); ?>
         <div class="dados">

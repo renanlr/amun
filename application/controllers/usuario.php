@@ -121,7 +121,8 @@ class Usuario extends CI_Controller {
         $dados['paises'] = $this->pais_model->buscarPaises()->result();
         $this->load->view('usuario/cadastro',$dados);
     }
-        
+
+
 }
 
 ?>

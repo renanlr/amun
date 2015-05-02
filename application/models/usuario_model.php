@@ -79,7 +79,35 @@ class Usuario_Model extends CI_Model {
         }
     }
 
+    public function verificaPagamento($id){
+        $this->db->where('idusuario',$id);
+        $situacao = $this->db->get('usuario')->row()->situacao_pagamento;
+        if($situacao!=NULL){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
 
+    public function retornaValorInsFesta($id){
+        if($this->db->where('pa_idusuario',$id)) {
+            if ($this->db->get('individual_pa')->row()->social_events) {
+                return 235;
+            } else {
+                return 150;
+            }
+        }
+
+        if($this->db->where('icty_idusuario',$id)){
+            if ($this->db->get('individual_icty')->row()->social_events) {
+                return 260;
+            } else {
+                return 175;
+            }
+        }
+        return FALSE;
+    }
 
 
 }
