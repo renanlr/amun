@@ -53,7 +53,7 @@ class Usuario_Model extends CI_Model {
         }
         if ($status == 3) {
             $query = $this->db->query("select qtd_vagas_pa from qtd_vagas where id = 1")->result();
-            if ($query['0']->qtd_vagas_icty == 0) {
+            if ($query['0']->qtd_vagas_pa == 0) {
                 return FALSE;
             } else {
                 $this->db->where('idusuario', $id);
@@ -67,6 +67,11 @@ class Usuario_Model extends CI_Model {
                 return TRUE;
             }
         }
+        if($status == 4){
+            $this->db->where('idusuario', $id);
+            $dado = array('status' => $status);
+            $this->db->update('usuario', $dado);
+        }
     }
     public function estrangeiro($id){
         $this->db->where('idusuario',$id);
@@ -79,7 +84,45 @@ class Usuario_Model extends CI_Model {
         }
     }
 
+    public function verificaPagamento($id){
+        $this->db->where('idusuario',$id);
+        $situacao = $this->db->get('usuario')->row()->situacao_pagamento;
+        if($situacao!=NULL){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
 
+    public function retornaValorInsFesta($id){
 
+        if($this->db->where('pa_idusuario',$id)) {
+            if ($this->db->get('individual_pa')->row()->social_events) {
+                return 235;
+            } else {
+                return 150;
+            }
+        }
+
+        if($this->db->where('icty_idusuario',$id)){
+            if ($this->db->get('individual_icty')->row()->social_events) {
+                return 260;
+            } else {
+                return 175;
+            }
+        }
+        return FALSE;
+    }
+
+    public function delegacao($id){
+        $this->db->where('delegacao_idusuario',$id);
+        if($this->db->get('delegacao')->row()->delegacao_idusuario){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
 
 }
