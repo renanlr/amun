@@ -12,7 +12,7 @@ class form extends CI_Controller {
                     $this->session->set_userdata('mensagem','Seccess');
                 }
                 else {
-                    $this->session->set_userdata('mensagem','No vacancy');
+                    $this->session->set_userdata('mensagem','No more places available');
                 }
 
     	} else {
