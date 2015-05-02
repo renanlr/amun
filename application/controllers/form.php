@@ -33,7 +33,7 @@ class form extends CI_Controller {
             'preferencies' => $this->input->post('preferencies'),
             'delegation_interest' => $this->input->post('delegacao'),
             'social_events' => $this->input->post('social'),
-            'usuario_idusuario' => $this->session->userdata('login_id'),
+            'icty_idusuario' => $this->session->userdata('login_id'),
         );
 
 
@@ -58,12 +58,11 @@ class form extends CI_Controller {
             'curso' => $this->input->post('curso'),
             'professor' => $this->input->post('professor'),
             'experiencia' => $this->input->post('experiencia'),
-            'pegunta' => $this->input->post('pergunta'),
+            'pergunta' => $this->input->post('pergunta'),
             'delegation_interest' => $this->input->post('delegacao'),
             'social_events' => $this->input->post('social'),
-            'usuario_idusuario' => $this->session->userdata('login_id'),
+            'pa_idusuario' => $this->session->userdata('login_id'),
         );
-
 
         if (($data['social_events'] == 0 || $data['social_events'] == 1) && ($data['delegation_interest'] == 0 || $data['delegation_interest'] == 1) && ($data['professor'] == 0 || $data['professor'] == 1)) {
 
