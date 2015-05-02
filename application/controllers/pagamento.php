@@ -22,7 +22,7 @@ class Pagamento extends CI_Controller {
         $dados['foto'] = base_url().'complemento/com/'.$picture['file_name'];
         $data['foto'] = $dados['foto'];
         $this->pagamento_model->criarComprovante($this->session->userdata('login_id'),$data);
-
+        $this->usuario_model->atualizarStatus($this->session->userdata('login_id'),5);
         redirect('usuario/home');
 
     }
@@ -42,25 +42,26 @@ class Pagamento extends CI_Controller {
         if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)<4){
             redirect('usuario/home');
         }
-        if($this->usuario_model->verificaPagamento($this->session->userdata('login_id'))){
-            $this->load->view('pagamento/confirmado');
-        }
-        else{
-            if($this->usuario_model->estrangeiro($this->session->userdata('login_id'))){
-                $this->load->view('pagamento/paypal');
-            }
-            else{
-                if($this->delegacao_model->delegacao($this->session->userdata('login_id'))){
-                    $dados['valor'] = $this->delegacao_model->retornaValorInc($this->session->userdata('login_id'));
-                }
-                else{
-                    $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
-                }
+        if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==4) {
+            if ($this->usuario_model->verificaPagamento($this->session->userdata('login_id'))) {
+                $this->load->view('pagamento/confirmado');
+            } else {
+                if ($this->usuario_model->estrangeiro($this->session->userdata('login_id'))) {
+                    $this->load->view('pagamento/paypal');
+                } else {
+                    if ($this->delegacao_model->delegacao($this->session->userdata('login_id'))) {
+                        $dados['valor'] = $this->delegacao_model->retornaValorInc($this->session->userdata('login_id'));
+                    } else {
+                        $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
+                    }
 
-                $this->load->view('pagamento/foto',$dados);
+                    $this->load->view('pagamento/foto', $dados);
+                }
             }
         }
-
+        if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==5){
+           $this->load->view('pagamento/pago');
+        }
     }
     
 

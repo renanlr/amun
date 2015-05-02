@@ -72,6 +72,11 @@ class Usuario_Model extends CI_Model {
             $dado = array('status' => $status);
             $this->db->update('usuario', $dado);
         }
+        if($status == 5){
+            $this->db->where('idusuario', $id);
+            $dado = array('status' => $status);
+            $this->db->update('usuario', $dado);
+        }
     }
     public function estrangeiro($id){
         $this->db->where('idusuario',$id);
