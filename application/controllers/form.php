@@ -65,9 +65,9 @@ class form extends CI_Controller {
         );
 
 
-        if (($data['social_events'] == 0 || $data['social_events'] == 1) && ($data['delegation_interest'] == 0 || $data['delegation_interest'] == 1)) {
+        if (($data['social_events'] == 0 || $data['social_events'] == 1) && ($data['delegation_interest'] == 0 || $data['delegation_interest'] == 1) && ($data['professor'] == 0 || $data['professor'] == 1)) {
 
-          $this->form_model->inserirFormIcty($data);
+          $this->form_model->inserirFormPa($data);
           $this->usuario_model->atualizarStatus($this->session->userdata('login_id'),4);
           $this->session->set_userdata('mensagem','Great, proceed to payment!');
           redirect('usuario/home');
