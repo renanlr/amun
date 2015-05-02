@@ -17,7 +17,7 @@
 	<div class="content-box">
 		<div class="titulo">Press Agency Form</div>
 		
-		<?php echo form_open('form/enviarRespostasIcty', 'enctype="multipart/form-data" id="form"' ) ?>
+		<?php echo form_open('form/enviarRespostasPa', 'enctype="multipart/form-data" id="form"' ) ?>
 			<table>
 				<thead>
 					<tr>
@@ -30,6 +30,9 @@
 					<tr><td><input type='text' name='universidade'></td></tr>
 					<tr class="bold"><td>Undergraduate Major, What do you study at your higher education institution?</td></tr>
 					<tr><td><input type='text' name='curso'></td></tr>
+					<tr class="bold"><td>Do you have a faculty advisor?</td></tr>
+					<tr><td><input type="radio" name="professor" value="1"> Yes</td></tr>
+					<tr><td><input type="radio" name="professor" value="0"> No</td></tr>
 					<tr class="bold"><td>Select those you are comfortable with experiencing:</td></tr>
 					<tr><td><input type="checkbox" name="experiencia" value="writing news"> Writing news</td></tr>
 					<tr><td><input type="checkbox" name="experiencia" value="taking pictures"> Taking pictures</td></tr>
@@ -42,7 +45,7 @@
 					<tr class="bold"><td>Do you wish to acquire our Social Events Package?</td></tr>
 					<tr><td><input type="radio" name="social" value="1"> Yes</td></tr>
 					<tr><td><input type="radio" name="social" value="0"> No</td></tr>
-					<tr><td><input type='submit' style="margin:20px auto; padding:12px 20px;"></td></tr>
+					<tr><td><input type='submit' value="Send" style="margin:20px auto; padding:12px 20px;"></td></tr>
 				</tbody>
 			</table>
 

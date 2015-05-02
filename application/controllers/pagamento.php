@@ -7,6 +7,7 @@ class Pagamento extends CI_Controller {
     
 
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
+
     public function payment(){
         $this->load->model('usuario_model');
         if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)<4){
@@ -20,7 +21,7 @@ class Pagamento extends CI_Controller {
                 $this->load->view('pagamento/paypal');
             }
             else{
-                if( $this->usuario_model->delegacao()){
+                if($this->usuario_model->delegacao()){
 
                 }
                 $valor = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
