@@ -15,9 +15,9 @@
 	</style>
 
 	<div class="content-box">
-		<div class="titulo">Press Agency Form</div>
+		<div class="titulo">Delegation Form</div>
 		
-		<?php echo form_open('form/enviarRespostasPa', 'enctype="multipart/form-data" id="form"' ) ?>
+		<?php echo form_open('form/enviarRespostasDelegation', 'enctype="multipart/form-data" id="form"' ) ?>
 			<table>
 				<thead>
 					<tr>
@@ -33,13 +33,9 @@
 					<tr class="bold"><td>Do you have a faculty advisor?</td></tr>
 					<tr><td><input type="radio" name="professor" value="1"> Yes</td></tr>
 					<tr><td><input type="radio" name="professor" value="0"> No</td></tr>
-					<tr class="bold"><td>Select those you are comfortable with experiencing:</td></tr>
-					<tr><td><input type="checkbox" name="experiencia" value="writing news"> Writing news</td></tr>
-					<tr><td><input type="checkbox" name="experiencia" value="taking pictures"> Taking pictures</td></tr>
-					<tr><td><input type="checkbox" name="experiencia" value="Managing social medias"> Managing social medias</td></tr>
-					<tr class="bold"><td>Why should you be a journalist at 18th AMUN’s Press Agency?</td></tr>
-					<tr style="height:100px !important;"><td><textarea style="height:90px !important;" name="pergunta" rows="4">Enter text here...</textarea></td></tr>
-					<tr class="bold"><td>Do you have any interest on participating as a one-delegate delegation if the Press Agency or the Press Agency do not have any vacancies anymore?</td></tr>
+					<tr class="bold"><td>Preferencies<br>Please, inform here your preferences for representation from the most desired option to the least one.</td></tr>
+					<tr><td><input type='text' name='preferencies'></td></tr>
+					<tr class="bold"><td>Do you have any interest on participating as a one-delegate delegation if the ICTY or the Press Agency do not have any vacancies anymore?</td></tr>
 					<tr><td><input type="radio" name="delegacao" value="1"> Yes</td></tr>
 					<tr><td><input type="radio" name="delegacao" value="0"> No</td></tr>
 					<tr class="bold"><td>Do you wish to acquire our Social Events Package?</td></tr>
@@ -72,18 +68,19 @@
                 }
             },
             messages: {
-            	universidade: "Isert your university",
+            	universidade: "Isert your name",
                 curso: {
-                    required: "Insert your course",
+                    required: "Insert your surname",
                 },
                 preferencies: {
-                    required: "Insert your preferencies",
+                    required: "Insert your badge name",
                 },
                 delegacao: {
-                    required: "Insert",
+                    required: "Insert your e-mail",
+                    email: "Incorrect format"
                 },
                 social: {
-                    required: ""
+                    required: "Insert your password"
                 }
            	}
       	});

@@ -93,6 +93,19 @@ class form extends CI_Controller {
         }
    	}
 
+    public function cadastroDelegacao(){
+      $this->load->model('usuario_model');
+        $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+        if ($dados->status == 2) {
+          $this->load->view('form/icty');
+        } elseif ($dados->status == 3) {
+          $this->load->view('form/press');
+        } else {
+          $this->session->set_userdata('mensagem','Seu formulário já foi enviado, para confirmar sua vaga realize o pagamento.');
+          redirect('usuario/home');
+        }
+    }
+
 
 }
 
