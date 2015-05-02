@@ -7,8 +7,16 @@ class Pagamento extends CI_Controller {
     
 
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
-    public function pagamento(){
-        var_dump($this);
+
+    public function payment(){
+        $this->load->model('usuario_model');
+        if($this->usuario_model->estrangeiro($this->session->userdata('login_id'))){
+            $this->load->view('pagamento/paypal');
+        }
+        else{
+            $this->load->view('pagamento/foto');
+        }
+
     }
     
 

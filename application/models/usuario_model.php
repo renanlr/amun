@@ -33,44 +33,53 @@ class Usuario_Model extends CI_Model {
         $this->db->insert('usuario',$data);
     }
 
-    public function atualizarStatus($id,$status){
-        if($status==2){
+    public function atualizarStatus($id,$status)
+    {
+        if ($status == 2) {
             $query = $this->db->query("select qtd_vagas_icty from qtd_vagas where id = 1")->result();
-            if($query['0']->qtd_vagas_icty==0){
+            if ($query['0']->qtd_vagas_icty == 0) {
                 return FALSE;
-            }
-            else{
+            } else {
                 $this->db->where('idusuario', $id);
                 $dado = array('status' => $status);
                 $this->db->update('usuario', $dado);
                 $this->db->where('id', 1);
                 $qtd = $this->db->get('qtd_vagas')->row()->qtd_vagas_icty;
                 $qtd = $qtd - 1;
-                $vagas = array('qtd_vagas_icty'=> $qtd);
-                $this->db->update('qtd_vagas',$vagas);
+                $vagas = array('qtd_vagas_icty' => $qtd);
+                $this->db->update('qtd_vagas', $vagas);
                 return TRUE;
             }
         }
-        if($status==3){
+        if ($status == 3) {
             $query = $this->db->query("select qtd_vagas_pa from qtd_vagas where id = 1")->result();
-            if($query['0']->qtd_vagas_icty==0){
+            if ($query['0']->qtd_vagas_icty == 0) {
                 return FALSE;
-            }
-            else{
+            } else {
                 $this->db->where('idusuario', $id);
                 $dado = array('status' => $status);
                 $this->db->update('usuario', $dado);
                 $this->db->where('id', 1);
                 $qtd = $this->db->get('qtd_vagas')->row()->qtd_vagas_pa;
                 $qtd = $qtd - 1;
-                $vagas = array('qtd_vagas_pa'=> $qtd);
-                $this->db->update('qtd_vagas',$vagas);
+                $vagas = array('qtd_vagas_pa' => $qtd);
+                $this->db->update('qtd_vagas', $vagas);
                 return TRUE;
             }
         }
-
-
     }
+    public function estrangeiro($id){
+        $this->db->where('idusuario',$id);
+        $qtd = $this->db->get('usuario')->row()->lista_paises_id;
+        if($qtd!=32){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
+
+
 
 
 }
