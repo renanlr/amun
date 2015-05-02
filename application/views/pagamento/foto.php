@@ -1,7 +1,9 @@
 <?php echo $this->load->view('_inc/header') ?>
     <div class="content-box">
-    <span>Valor: <?php echo $valor ?> </span>
-
+    <span>Value: <?php echo $valor ?> </span>
+    <span>CAREL AMUN</span>
+    <span>3603-X</span>
+    <span>C/C: 36.703-6</span>
     <?php echo form_open('pagamento/enviarComprovante', 'class="form-professor" enctype="multipart/form-data" id="form"'); ?>
         <div class="dados">
             <div class="subtitulo">Personal</div>
