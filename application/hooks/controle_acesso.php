@@ -27,8 +27,9 @@ class Controle_Acesso {
 		$permissao['usuario']['cadastrar'] = array(0, 1, 2, 3);
 
 		$permissao['form']['escolherOpcaoIndividual'] = array(1);
-		$permissao['form']['cadastro'] = array(1);
+		$permissao['form']['cadastroIndividual'] = array(1);
 		$permissao['form']['enviarRespostasIcty'] = array(1);
+		$permissao['form']['enviarRespostasPa'] = array(1);
 
         $permissao['pagamento']['payment'] = array(0, 1, 2, 3);
 

@@ -29,6 +29,7 @@ class form extends CI_Controller {
         $data = array(
             'universidade' => $this->input->post('universidade'),
             'curso' => $this->input->post('curso'),
+            'professor' => $this->input->post('professor'),
             'preferencies' => $this->input->post('preferencies'),
             'delegation_interest' => $this->input->post('delegacao'),
             'social_events' => $this->input->post('social'),
@@ -47,6 +48,35 @@ class form extends CI_Controller {
         }
 
    	}
+
+    public function enviarRespostasPa(){
+      $this->load->model('form_model');
+      $this->load->model('usuario_model');
+
+        $data = array(
+            'universidade' => $this->input->post('universidade'),
+            'curso' => $this->input->post('curso'),
+            'professor' => $this->input->post('professor'),
+            'experiencia' => $this->input->post('experiencia'),
+            'pegunta' => $this->input->post('pergunta'),
+            'delegation_interest' => $this->input->post('delegacao'),
+            'social_events' => $this->input->post('social'),
+            'usuario_idusuario' => $this->session->userdata('login_id'),
+        );
+
+
+        if (($data['social_events'] == 0 || $data['social_events'] == 1) && ($data['delegation_interest'] == 0 || $data['delegation_interest'] == 1)) {
+
+          $this->form_model->inserirFormIcty($data);
+          $this->usuario_model->atualizarStatus($this->session->userdata('login_id'),4);
+          $this->session->set_userdata('mensagem','Great, proceed to payment!');
+          redirect('usuario/home');
+        } else {
+          $this->session->set_userdata('mensagem','Something went wrong');
+        }
+
+    }
+
 
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 

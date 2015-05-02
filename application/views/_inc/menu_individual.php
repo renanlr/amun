@@ -8,7 +8,7 @@ $user = $ci->usuario_model->buscarUsuarioPorId($this->session->userdata('login_i
 	<ul>
 		<li><a href="<?php echo base_url(); ?>index.php/usuario/home">Home</a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/usuario/home">></a></li>
-		<li><a href="<?php echo base_url(); ?>index.php/form/cadastro">Form</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/form/cadastroIndividual">Form</a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/form/cadastro">></a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/pagamento/payment">Payment</a></li>
 	</ul>
