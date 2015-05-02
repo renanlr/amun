@@ -9,14 +9,14 @@ class form extends CI_Controller {
 
     	if ($novoStatus != 2 || $novoStatus != 3) {
                 if($this->usuario_model->atualizarStatus($this->session->userdata('login_id') ,$novoStatus)){
-                    $this->session->set_userdata('mensagem','Seccess');
+                    $this->session->set_userdata('Alert','Seccess');
                 }
                 else {
-                    $this->session->set_userdata('mensagem','No more places available');
+                    $this->session->set_userdata('Alert','No more places available');
                 }
 
     	} else {
-	    	$this->session->set_userdata('mensagem','Something went wrong');
+	    	$this->session->set_userdata('Alert','Something went wrong');
 	    }
 
 	    redirect('usuario/home');
@@ -41,10 +41,10 @@ class form extends CI_Controller {
 
         	$this->form_model->inserirFormIcty($data);
         	$this->usuario_model->atualizarStatus($this->session->userdata('login_id'),4);
-        	$this->session->set_userdata('mensagem','Great, proceed to payment!');
+        	$this->session->set_userdata('Alert','Great, proceed to payment!');
         	redirect('usuario/home');
         } else {
-        	$this->session->set_userdata('mensagem','Something went wrong');
+        	$this->session->set_userdata('Alert','Something went wrong');
         }
 
    	}
@@ -68,10 +68,10 @@ class form extends CI_Controller {
 
           $this->form_model->inserirFormPa($data);
           $this->usuario_model->atualizarStatus($this->session->userdata('login_id'),4);
-          $this->session->set_userdata('mensagem','Great, proceed to payment!');
+          $this->session->set_userdata('Alert','Great, proceed to payment!');
           redirect('usuario/home');
         } else {
-          $this->session->set_userdata('mensagem','Something went wrong');
+          $this->session->set_userdata('Alert','Something went wrong');
         }
 
     }
@@ -87,7 +87,7 @@ class form extends CI_Controller {
         } elseif ($dados->status == 3) {
         	$this->load->view('form/press');
         } else {
-        	$this->session->set_userdata('mensagem','Seu formulário já foi enviado, para confirmar sua vaga realize o pagamento.');
+        	$this->session->set_userdata('Alert','Something went wrong');
         	redirect('usuario/home');
         }
    	}
@@ -100,7 +100,7 @@ class form extends CI_Controller {
         } elseif ($dados->status == 3) {
           $this->load->view('form/press');
         } else {
-          $this->session->set_userdata('mensagem','Seu formulário já foi enviado, para confirmar sua vaga realize o pagamento.');
+          $this->session->set_userdata('Alert','Seu formulário já foi enviado, para confirmar sua vaga realize o pagamento.');
           redirect('usuario/home');
         }
     }

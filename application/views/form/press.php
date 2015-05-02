@@ -38,7 +38,7 @@
 					<tr><td><input type="checkbox" name="experiencia" value="taking pictures"> Taking pictures</td></tr>
 					<tr><td><input type="checkbox" name="experiencia" value="Managing social medias"> Managing social medias</td></tr>
 					<tr class="bold"><td>Why should you be a journalist at 18th AMUN’s Press Agency?</td></tr>
-					<tr style="height:100px !important;"><td><textarea style="height:90px !important;" name="pergunta" rows="4">Enter text here...</textarea></td></tr>
+					<tr style="height:100px !important;"><td><textarea style="height:90px !important;" name="pergunta" rows="4" placeholder="Enter text here..."></textarea></td></tr>
 					<tr class="bold"><td>Do you have any interest on participating as a one-delegate delegation if the Press Agency or the Press Agency do not have any vacancies anymore?</td></tr>
 					<tr><td><input type="radio" name="delegacao" value="1"> Yes</td></tr>
 					<tr><td><input type="radio" name="delegacao" value="0"> No</td></tr>

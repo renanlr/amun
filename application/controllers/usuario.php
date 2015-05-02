@@ -21,7 +21,7 @@ class Usuario extends CI_Controller {
         $usuario = $this->usuario_model->buscarUsuario($login, $senha);
         var_dump($usuario);
         if (!$usuario) {
-            $this->session->set_userdata('mensagem','Login e/ou senha inválido(s).');
+            $this->session->set_userdata('Alert','Invalid access!');
             redirect('usuario/login');
         } else {
             $dados = array(
@@ -40,7 +40,7 @@ class Usuario extends CI_Controller {
         $email = $this->input->post('email');
         $usuario = $this->usuario_model->buscarEmail($email);
         if(!$usuario) {
-            $this->session->set_userdata('mensagem', 'E-mail não cadastrado.');
+            $this->session->set_userdata('Alert', 'E-mail not found.');
             redirect('usuario/recuperacaoSenha');
         } else {
             $senha = random_string('alnum', 9);
@@ -51,7 +51,7 @@ class Usuario extends CI_Controller {
             'Reply-To: amun@amun.org.br' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
             mail($email, $assunto, $mensagem, $headers);
-            $this->session->set_userdata('mensagem', "Your new password was sent to your e-mail!");
+            $this->session->set_userdata('Alert', "Your new password was sent to your e-mail!");
             $this->load->view('usuario/login');
         }   
     }
@@ -81,14 +81,14 @@ class Usuario extends CI_Controller {
         );
 
         if ($this->usuario_model->buscarEmail($data['email']) != false) {
-            $this->session->set_userdata('mensagem', 'This e-mail already exists');
+            $this->session->set_userdata('Alert', 'This e-mail already exists.');
             redirect('usuario/cadastro');
         } elseif ($data['tipo'] == 1 || $data['tipo'] == 2) {
             $this->usuario_model->inserirUsuario($data);
-            $this->session->set_userdata('mensagem', 'Success, try login');
+            $this->session->set_userdata('Alert', 'User created, please login.');
             redirect('usuario/login');
         } else {
-            $this->session->set_userdata('mensagem', 'Something went wrong, please try again');
+            $this->session->set_userdata('Alert', 'Something went wrong, please try again');
             redirect('usuario/cadastro');
         }
     }
