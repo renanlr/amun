@@ -4,7 +4,7 @@
 		tr{
 			height: 35px;
 		}
-		table{
+		.table-master{
 			margin-left: 130px;
 			margin-bottom: 50px;
 			width: 675px;
@@ -18,7 +18,7 @@
 		<div class="titulo">ICTY Form</div>
 		
 		<?php echo form_open('form/enviarRespostasIcty', 'enctype="multipart/form-data" id="form"' ) ?>
-			<table>
+			<table class="table-master">
 				<thead>
 					<tr>
 						<th></th>
@@ -34,7 +34,20 @@
 					<tr><td><input type="radio" name="professor" value="1"> Yes</td></tr>
 					<tr><td><input type="radio" name="professor" value="0"> No</td></tr>
 					<tr class="bold"><td>Preferencies<br>Please, inform here your preferences for representation from the most desired option to the least one.</td></tr>
-					<tr><td><input type='text' name='preferencies'></td></tr>
+					<tr><td>
+						<table>
+							<thead>
+								
+							</thead>
+							<tbody>
+									<tr><td style="width: 170px;font-weight: bold;">First:</td><td style="width: 170px;font-weight: bold;">Second:</td><td style="width: 170px;font-weight: bold;">Third:</td></tr>
+									<tr><td><input type="radio" name="first" value="Judge"> Judge</td><td><input type="radio" name="second" value="Judge"> Judge</td><td><input type="radio" name="third" value="Judge"> Judge</td></tr>
+									<tr><td><input type="radio" name="first" value="Prosecutor"> Prosecutors</td><td><input type="radio" name="second" value="Prosecutor"> Prosecutors</td><td><input type="radio" name="third" value="Prosecutor"> Prosecutors</td></tr>
+									<tr><td><input type="radio" name="first" value="Defense Lawyers"> Defense Lawyers</td><td><input type="radio" name="second" value="Defense Lawyers"> Defense Lawyers</td><td><input type="radio" name="third" value="Defense Lawyers"> Defense Lawyers</td></tr>
+							</tbody>
+						</table>
+					</td></tr>
+					
 					<tr class="bold"><td>Do you have any interest on participating as a one-delegate delegation if the ICTY or the Press Agency do not have any vacancies anymore?</td></tr>
 					<tr><td><input type="radio" name="delegacao" value="1"> Yes</td></tr>
 					<tr><td><input type="radio" name="delegacao" value="0"> No</td></tr>

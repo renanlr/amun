@@ -30,6 +30,7 @@ class Controle_Acesso {
 		$permissao['form']['cadastroIndividual'] = array(1);
 		$permissao['form']['enviarRespostasIcty'] = array(1);
 		$permissao['form']['enviarRespostasPa'] = array(1);
+		$permissao['form']['cadastroDelegacao'] = array(2);
 
         $permissao['pagamento']['payment'] = array(0, 1, 2, 3);
         $permissao['pagamento']['enviarComprovante'] = array(0, 1, 2, 3);

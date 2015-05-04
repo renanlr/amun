@@ -9,7 +9,7 @@ class form extends CI_Controller {
 
     	if ($novoStatus != 2 || $novoStatus != 3) {
                 if($this->usuario_model->atualizarStatus($this->session->userdata('login_id') ,$novoStatus)){
-                    $this->session->set_userdata('Alert','Seccess');
+                    $this->session->set_userdata('Alert','Fill the form.');
                 }
                 else {
                     $this->session->set_userdata('Alert','No more places available');
@@ -26,11 +26,17 @@ class form extends CI_Controller {
    		$this->load->model('form_model');
    		$this->load->model('usuario_model');
 
+      $preferencies = array(
+            1 => $this->input->post('first'),
+            2 => $this->input->post('second'),
+            3 => $this->input->post('third')
+      );
+
         $data = array(
             'universidade' => $this->input->post('universidade'),
             'curso' => $this->input->post('curso'),
             'professor' => $this->input->post('professor'),
-            'preferencies' => $this->input->post('preferencies'),
+            'preferencies' => json_encode($preferencies),
             'delegation_interest' => $this->input->post('delegacao'),
             'social_events' => $this->input->post('social'),
             'icty_idusuario' => $this->session->userdata('login_id'),
@@ -95,14 +101,16 @@ class form extends CI_Controller {
     public function cadastroDelegacao(){
       $this->load->model('usuario_model');
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
-        if ($dados->status == 2) {
+        $this->session->set_userdata('Alert','This form will be available very soon. Once it is, you will receive an e-mail requesting that you access the system to fill it.');
+        redirect('usuario/home');
+        /*if ($dados->status == 2) {
           $this->load->view('form/icty');
         } elseif ($dados->status == 3) {
           $this->load->view('form/press');
         } else {
           $this->session->set_userdata('Alert','Seu formulário já foi enviado, para confirmar sua vaga realize o pagamento.');
           redirect('usuario/home');
-        }
+        }*/
     }
 
 

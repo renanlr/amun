@@ -7,7 +7,7 @@
 		<div style="margin-bottom: 30px;font-size: 20px;font-weight: bold;color: red;">
 			Next step:
 			<?php if ($status < 4) {
-				echo "Fill the form.";
+				echo "Wait for e-mail.";
 			} elseif ($status < 5) {
 				echo "Do the payment.";
 			} elseif ($status < 6) {

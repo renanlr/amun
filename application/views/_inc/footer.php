@@ -7,11 +7,11 @@
 				<div id="footer-right"></div>
 			</div>
 		</div>
-		<?php if ($this->session->userdata('mensagem')): ?>
+		<?php if ($this->session->userdata('Alert')): ?>
 			<div class="popup-mensagem">
 				<div class="popup-inner-mensagem">
-					<p class="popup-mensagem-titulo"><strong>Mensagem</strong></p>
-					<p><?php echo $this->session->userdata('mensagem') ?></p>
+					<p class="popup-mensagem-titulo"><strong>Alert</strong></p>
+					<p><?php echo $this->session->userdata('Alert') ?></p>
 					<div style="margin-top: 30px; text-align: center">
 						<a style="min-width: 80px;" href="#" class="btn btn-custom confirm">OK</a>
 					</div>
@@ -24,7 +24,7 @@
 					});
 				})
 			</script>
-			<?php $this->session->unset_userdata('mensagem'); //exclui a mensagem  ?>
+			<?php $this->session->unset_userdata('Alert'); //exclui a mensagem  ?>
 		<?php endif ?>
 
 	</body>
