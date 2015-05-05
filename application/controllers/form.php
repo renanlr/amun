@@ -155,7 +155,6 @@ class form extends CI_Controller {
         );
 
         $this->paises_model->inserirOpcaoDePaises($data);
-        $this->usuario_model->atualizarStatus1($this->session->userdata('login_id'),3);
         $this->session->set_userdata('Alert','Great, proceed to payment, or insert another option');
         redirect('form/cadastroPaises');
       }

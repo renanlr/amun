@@ -42,23 +42,20 @@ class Pagamento extends CI_Controller {
 
         if ($user->tipo == 1) {
             if(($user->status) < 4){
+                $this->session->set_userdata('Alert', 'You have steps to complete before payment.');
                 redirect('usuario/home');
             }elseif(($user->status)==4) {
                 if ($this->usuario_model->estrangeiro($this->session->userdata('login_id'))) {
                     $this->load->view('pagamento/paypal');
                 } else {
-                    if ($this->delegacao_model->delegacao($this->session->userdata('login_id'))) {
-                        $dados['valor'] = $this->delegacao_model->retornaValorInc($this->session->userdata('login_id'));
-                    } else {
-                        $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
-                    }
+                    $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
                     $dados['tipo'] = 1;
                     $this->load->view('pagamento/foto', $dados);
                 }
-            }elseif(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==5){
-               $this->session->set_userdata('Alert', 'Please wait for your payment to be confirmed. Once it\'s confirmed, you will be informed by e-mail.');
-               redirect('usuario/home');
-            }elseif(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==6){
+            }elseif(($user->status)==5){
+                $this->session->set_userdata('Alert', 'Please wait for your payment to be confirmed. Once it\'s confirmed, you will be informed by e-mail.');
+                redirect('usuario/home');
+            }elseif(($user->status)==6){
                 $this->session->set_userdata('Alert', 'Your payment is now confirmed, see you at the 18th AMUN!');
                 redirect('usuario/home');
             }
@@ -69,7 +66,7 @@ class Pagamento extends CI_Controller {
             }elseif($user->status == 3){
                 $delegation = $this->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'));
                 if ($delegation->qtd_gratuidade == 0) {
-                    //$dados['valor'] = $this->delegacao_model->retornaValorInc($this->session->userdata('login_id'));
+                    //$dados['valor'] = $this->delegacao_model->retornaValorIns($this->session->userdata('login_id'));
                     $dados['tipo'] = 2;
                     $this->load->view('pagamento/foto', $dados);
                 }else{
@@ -85,10 +82,6 @@ class Pagamento extends CI_Controller {
             }
         }
     }
-    
-
-    
-        
 }
 
 ?>
