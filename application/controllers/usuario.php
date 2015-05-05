@@ -44,16 +44,17 @@ class Usuario extends CI_Controller {
             redirect('usuario/recuperacaoSenha');
         } else {
             $senha = random_string('alnum', 9);
-            $this->usuario_model->atualizarSenha($usuario->id, md5($senha));
+            $emailsender = 'amun@amun.org.br';
+            $this->usuario_model->atualizarSenha($usuario->idusuario, md5($senha));
             $assunto = '[AMUN] New Password';
             $mensagem = "Hello, $usuario->email! \r\n \r\nYour new password is: \r\n \r\n$senha \r\n";
             $headers = 'From: amun@amun.org.br' . "\r\n" .
             'Reply-To: amun@amun.org.br' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
-            mail($email, $assunto, $mensagem, $headers);
+            mail($email, $assunto, $mensagem, $headers, "-r".$emailsender);
             $this->session->set_userdata('Alert', "Your new password was sent to your e-mail!");
             $this->load->view('usuario/login');
-        }   
+        }
     }
 
     public function deslogar(){
@@ -93,6 +94,15 @@ class Usuario extends CI_Controller {
         }
     }
 
+    public function alterarStatus($novoStatus){
+        $this->load->helper("criptografia");
+        $this->load->model('usuario_model');
+        $novoStatus = descriptografar($novoStatus);
+        $this->usuario_model->atualizarStatus1($this->session->userdata('login_id'),$novoStatus);
+        $this->session->set_userdata('Alert','Great, proceed to payment!');
+        redirect('pagamento/payment');
+    }
+
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 
     public function home() {
@@ -122,7 +132,30 @@ class Usuario extends CI_Controller {
         $this->load->view('usuario/cadastro',$dados);
     }
 
+    public function meusDados(){
+        $this->load->model('usuario_model');
+        $this->load->model('pais_model');
+        $dados['paises'] = $this->pais_model->buscarPaises()->result();
+        $dados['usuario'] = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+        $this->load->view('usuario/meusDados',$dados);
+    }
 
+    public function alterarDados(){
+        $this->load->model('usuario_model');
+        $dados = array(
+            'nome' => $this->input->post('name'),
+            'sobrenome' => $this->input->post('surName'),
+            'nome_cracha' => $this->input->post('badgeName'),
+            'senha' => md5($this->input->post('senha')),
+            'celular' => $this->input->post('cel'),
+            'cep' => $this->input->post('zip'),
+            'cidade' => $this->input->post('city'),
+            'estado' => $this->input->post('state'),
+            'identification' => $this->input->post('identification'),
+            );
+        $this->usuario_model->atualizarDados($this->session->userdata('login_id'),$dados);
+        redirect('usuario/home');
+    }
 }
 
 ?>

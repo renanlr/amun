@@ -27,7 +27,7 @@
 			<span>Country</span><br>
             <select name="country" style="width:200px" form="form">
                 <?php foreach ($paises as $pais) { ?>
-                <option value="<?php echo $pais->id ?>"><?php echo $pais->nome?></option>
+                    <option value="<?php echo $pais->id ?>"><?php echo $pais->nome?></option>
                 <?php }?>
             </select><br>
 			<span>Identification (CPF/passport)</span>

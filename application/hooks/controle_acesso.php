@@ -25,15 +25,22 @@ class Controle_Acesso {
 		$permissao['usuario']['recuperacaoSenha'] = array(0, 1, 2, 3);
 		$permissao['usuario']['cadastro'] = array(0, 1, 2, 3);
 		$permissao['usuario']['cadastrar'] = array(0, 1, 2, 3);
+        $permissao['usuario']['meusDados'] = array(0, 1, 2, 3);
+        $permissao['usuario']['alterarDados'] = array(0, 1, 2, 3);
+        $permissao['usuario']['alterarStatus'] = array(1, 2);
 
 		$permissao['form']['escolherOpcaoIndividual'] = array(1);
 		$permissao['form']['cadastroIndividual'] = array(1);
 		$permissao['form']['enviarRespostasIcty'] = array(1);
 		$permissao['form']['enviarRespostasPa'] = array(1);
 		$permissao['form']['cadastroDelegacao'] = array(2);
+		$permissao['form']['enviarRespostasDelegacao'] = array(2);
+		$permissao['form']['cadastroPaises'] = array(2);
+		$permissao['form']['cadastrarOpcaoPaises'] = array(2);
 
-        $permissao['pagamento']['payment'] = array(0, 1, 2, 3);
-        $permissao['pagamento']['enviarComprovante'] = array(0, 1, 2, 3);
+        $permissao['pagamento']['payment'] = array(1, 2);
+        $permissao['pagamento']['enviarComprovante'] = array(1, 2);
+
 
 		$ci =& get_instance();
 		$controller = $ci->router->class;

@@ -25,7 +25,7 @@
 			} elseif ($status < 6) {
 				echo "Please wait for confirmation.";
 			} else {
-				echo "Congratulations, you are officially a participant at the 18TH AMUN.";
+				echo "Congratulations, you are officially a participant at the 18th AMUN!";
 			}?>
 		</div>
 

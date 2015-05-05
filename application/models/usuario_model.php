@@ -33,8 +33,7 @@ class Usuario_Model extends CI_Model {
         $this->db->insert('usuario',$data);
     }
 
-    public function atualizarStatus($id,$status)
-    {
+    public function atualizarStatus($id,$status){
         if ($status == 2) {
             $query = $this->db->query("select qtd_vagas_icty from qtd_vagas where id = 1")->result();
             if ($query['0']->qtd_vagas_icty == 0) {
@@ -78,6 +77,13 @@ class Usuario_Model extends CI_Model {
             $this->db->update('usuario', $dado);
         }
     }
+
+    public function atualizarStatus1($id,$status){
+        $this->db->where('idusuario', $id);
+        $dado = array('status' => $status);
+        $this->db->update('usuario', $dado);
+    }
+
     public function estrangeiro($id){
         $this->db->where('idusuario',$id);
         $qtd = $this->db->get('usuario')->row()->lista_paises_id;
@@ -92,7 +98,7 @@ class Usuario_Model extends CI_Model {
     public function verificaPagamento($id){
         $this->db->where('idusuario',$id);
         $situacao = $this->db->get('usuario')->row()->situacao_pagamento;
-        if($situacao!=NULL){
+        if($situacao==1){
             return TRUE;
         }
         else{
@@ -130,4 +136,9 @@ class Usuario_Model extends CI_Model {
         }
     }
 
+
+    public function atualizarDados($id,$dados){
+        $this->db->where('idusuario',$id);
+        $this->db->update('usuario',$dados);
+    }
 }

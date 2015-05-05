@@ -13,4 +13,9 @@ class Delegacao_Model extends CI_Model
             return FALSE;
         }
     }
+
+    public function buscarDelegacaoPorIdUsuario($id){
+    	$this->db->where('delegacao_idusuario', $id);
+        return $this->db->get('delegacao')->row();
+    }
 }

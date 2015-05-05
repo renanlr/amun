@@ -17,7 +17,7 @@ $user = $ci->usuario_model->buscarUsuarioPorId($this->session->userdata('login_i
 		<a title="Home" href="<?php echo base_url(); ?>index.php/">
 			<img src="<?php echo base_url(); ?>public/images/icon-home.svg">
 		</a>
-		<a title="Perfil" href="<?php echo base_url(); ?>index.php/professor/meusDados">
+		<a title="Perfil" href="<?php echo base_url(); ?>index.php/usuario/meusDados">
 			<img src="<?php echo base_url(); ?>public/images/icon-perfil.svg">
 		</a>
 		<a title="Sair" href="<?php echo base_url(); ?>index.php/usuario/deslogar">

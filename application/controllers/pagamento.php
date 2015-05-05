@@ -27,8 +27,7 @@ class Pagamento extends CI_Controller {
 
     }
 
-    public function base_img_dir()
-    {
+    public function base_img_dir(){
         return './complemento/comprovantes';
     }
 
@@ -39,13 +38,12 @@ class Pagamento extends CI_Controller {
         $this->load->model('usuario_model');
         $this->load->model('delegacao_model');
 
-        if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)<4){
-            redirect('usuario/home');
-        }
-        if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==4) {
-            if ($this->usuario_model->verificaPagamento($this->session->userdata('login_id'))) {
-                $this->load->view('pagamento/confirmado');
-            } else {
+        $user = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+
+        if ($user->tipo == 1) {
+            if(($user->status) < 4){
+                redirect('usuario/home');
+            }elseif(($user->status)==4) {
                 if ($this->usuario_model->estrangeiro($this->session->userdata('login_id'))) {
                     $this->load->view('pagamento/paypal');
                 } else {
@@ -54,13 +52,37 @@ class Pagamento extends CI_Controller {
                     } else {
                         $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
                     }
-
+                    $dados['tipo'] = 1;
                     $this->load->view('pagamento/foto', $dados);
                 }
+            }elseif(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==5){
+               $this->session->set_userdata('Alert', 'Please wait for your payment to be confirmed. Once it\'s confirmed, you will be informed by e-mail.');
+               redirect('usuario/home');
+            }elseif(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==6){
+                $this->session->set_userdata('Alert', 'Your payment is now confirmed, see you at the 18th AMUN!');
+                redirect('usuario/home');
             }
-        }
-        if(($this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'))->status)==5){
-           $this->load->view('pagamento/pago');
+        }elseif ($user->tipo == 2) {
+            if ($user->status < 3) {
+                $this->session->set_userdata('Alert', 'You have steps to complete before payment.');
+                redirect('usuario/home');
+            }elseif($user->status == 3){
+                $delegation = $this->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'));
+                if ($delegation->qtd_gratuidade == 0) {
+                    //$dados['valor'] = $this->delegacao_model->retornaValorInc($this->session->userdata('login_id'));
+                    $dados['tipo'] = 2;
+                    $this->load->view('pagamento/foto', $dados);
+                }else{
+                    $this->session->set_userdata('Alert', 'Please send e-mail to amun@amun.org.br with information (name , e- mail , cpf) of delegate who has gratuity. If you have already sent wait for confirmation.');
+                    redirect('usuario/home');
+                }
+            }elseif($user->status == 4){
+                $this->session->set_userdata('Alert', 'Please wait for your payment to be confirmed. Once it\'s confirmed, you will be informed by e-mail.');
+                redirect('usuario/home');
+            }else{
+                $this->session->set_userdata('Alert', 'Your payment is now confirmed, see you at the 18th AMUN!');
+                redirect('usuario/home');
+            }
         }
     }
     
