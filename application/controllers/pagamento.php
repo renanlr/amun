@@ -31,7 +31,9 @@ class Pagamento extends CI_Controller {
         return './complemento/comprovantes';
     }
 
-
+    public function calculaValorDelegacao($delegation){
+        return $delegation->qtd_integrantes * 175 + $delegation->qtd_pacotes * 85 - $delegation->qtd_gratuidade;
+    }
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 
     public function payment(){
@@ -39,13 +41,13 @@ class Pagamento extends CI_Controller {
         $this->load->model('delegacao_model');
 
         $user = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
-
         if ($user->tipo == 1) {
             if(($user->status) < 4){
                 $this->session->set_userdata('Alert', 'You have steps to complete before payment.');
                 redirect('usuario/home');
             }elseif(($user->status)==4) {
                 if ($this->usuario_model->estrangeiro($this->session->userdata('login_id'))) {
+
                     $this->load->view('pagamento/paypal');
                 } else {
                     $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
@@ -60,13 +62,15 @@ class Pagamento extends CI_Controller {
                 redirect('usuario/home');
             }
         }elseif ($user->tipo == 2) {
+
             if ($user->status < 3) {
                 $this->session->set_userdata('Alert', 'You have steps to complete before payment.');
                 redirect('usuario/home');
             }elseif($user->status == 3){
                 $delegation = $this->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'));
                 if ($delegation->qtd_gratuidade == 0) {
-                    //$dados['valor'] = $this->delegacao_model->retornaValorIns($this->session->userdata('login_id'));
+
+                    $dados['valor'] = $this->calculaValorDelegacao($delegation);
                     $dados['tipo'] = 2;
                     $this->load->view('pagamento/foto', $dados);
                 }else{
