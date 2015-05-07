@@ -110,7 +110,7 @@ class Usuario extends CI_Controller {
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
 
         if ($this->session->userdata('login_perfil') == 3) {
-            redirect('home/admin');
+            $this->load->view('home/admin');
         } elseif ($this->session->userdata('login_perfil') == 2) {
             $this->load->view('home/delegation', $dados);
         } elseif ($this->session->userdata('login_perfil') == 1) {

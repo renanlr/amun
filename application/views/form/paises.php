@@ -2,6 +2,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.validate.js" ></script>
 <?php $this->load->helper('criptografia');?>
 <div class="content-box">
+    <?php if ($status < 4) { ?>
 	<div class="titulo">Countries Registration</div>
 	<?php echo form_open('form/cadastrarOpcaoPaises', 'class="form-professor" enctype="multipart/form-data" id="form"'); ?>
 		<div class="dados">
@@ -80,8 +81,7 @@ Each time you fill and submit the form with one combination, it will be register
 		</div>
 		<input style="margin:20px auto; padding:12px 20px;" type="submit" value="Register Preference">
 	<?php echo form_close(); ?>
-
-    
+    <?php }?>
     <div>
         <BR><BR><div class="titulo">Registered Preferences</div>
         <table class="table table-list table-condensed">

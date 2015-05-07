@@ -1,4 +1,5 @@
 <?php echo $this->load->view('_inc/header') ?>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.validate.js" ></script>
     <style type="text/css">
         .bold{
             font-weight: bold;
@@ -10,8 +11,8 @@
 
     <div class="content-box">
         <div class="dados">
-            <?php if($tipo==2){?>
             <div class="titulo">Personal Payment</div>
+            <?php if($tipo==1){?>
                 <p style="  font-size: 17px;text-align: justify;">
                     Now, delegate, it is time to pay the registration fee and party entrances in order to complete the registration process.<br> Registrations will have the cost of <span class="bold">R$ 150,00</span> for the Press Agency and <span class="bold">R$ 175,00</span> for the ICTY in the first round of registrations.
             The Social Events combo, which includes both Beer Garden and Main Party, costs <span class="bold">R$ 85,00</span>  if bought during the registration period.
@@ -40,4 +41,25 @@
                 <?php echo form_close(); ?>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#form").validate({
+                rules: {
+                    numero: "required",
+                    foto: {
+                        required: true
+                    },
+                },
+                messages: {
+                    numero: "Incomplete.",
+                    foto: {
+                        required: "Incomplete.",
+                    },
+                }
+                
+            });
+       });
+       
+    </script> 
 <?php echo $this->load->view('_inc/footer') ?>

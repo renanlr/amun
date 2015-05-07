@@ -104,15 +104,18 @@ class form extends CI_Controller {
       if ( ($integrantes > 6 || $integrantes < 1) || ($gratuitos > 6 || $gratuitos < 0) || ($pacotes > 6 || $pacotes < 0)) {
         $this->session->set_userdata('Alert','Something went wrong, please note that the maximum number of delegates in a delegation is 6.');
         redirect('form/cadastroDelegacao');
-      } elseif($vagas->qtd_vagas_delegacao < 1) {
+      } elseif($vagas->qtd_vagas_delegacao < $data['qtd_integrantes']) {
         $this->session->set_userdata('Alert','No more places available');
         redirect('usuario/home');
+      } elseif($data['qtd_integrantes'] < $data['qtd_pacotes']){
+        $this->session->set_userdata('Alert','Something went wrong, note that the maximum number of social events combo is up to the number of delegates.');
+        redirect('form/paises');
       } else {
         $this->form_model->inserirFormDelegacao($data);
         $this->form_model->decrementarQtdVagasDelegacao($data['qtd_integrantes']);
         $this->usuario_model->atualizarStatus1($this->session->userdata('login_id'),2);
         $this->session->set_userdata('Alert','Great, now you can inform us your country preferences at the next step.');
-        redirect('usuario/home');
+        redirect('form/cadastroPaises');
       }
 
     }
@@ -156,7 +159,7 @@ class form extends CI_Controller {
 
         $this->paises_model->inserirOpcaoDePaises($data);
         $this->session->set_userdata('Alert','Great, proceed to payment, or insert another option');
-        redirect('form/cadastroPaises');
+        redirect('pagamento/payment');
       }
 
     }
@@ -184,7 +187,7 @@ class form extends CI_Controller {
         $this->load->view('form/delegacao');
       } else {
         $this->session->set_userdata('Alert','You have already submitted this form, go to the next step');
-        redirect('usuario/home');
+        redirect('form/cadastroPaises');
       }
     }
 
@@ -199,7 +202,7 @@ class form extends CI_Controller {
       if ($user->status==1) {
         $this->session->set_userdata('Alert','First fill the form.');
         redirect('usuario/home');
-      } elseif($user->status==2){
+      } else {
         $delegacao = $this->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'))->iddelegacao;
         $itens = $this->paises_model->buscarOpcoesDePaisesCadastrados($delegacao);
         $lista = array();
@@ -220,11 +223,9 @@ class form extends CI_Controller {
         }
         $dados['paises'] = $this->paises_model->buscarPaises();
         $dados['paises_cadastrados'] = $lista;
+        $dados['status'] = $user->status;
         $this->load->view('form/paises', $dados);
-      } elseif ($user->status > 2) {
-        $this->session->set_userdata('Alert','You have already submitted the preferences of countries, go to the next step');
-        redirect('usuario/home');
-      }
+      } 
     }
 }
 

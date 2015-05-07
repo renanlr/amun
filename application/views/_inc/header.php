@@ -23,7 +23,7 @@
 				<div id="banner" style="text-align:center; color:#fecb20; font-size:50px; width:930px;">
 					<?php 
 						if ($this->session->userdata('login_perfil') == 3) { ?>
-							Painel do Administrador
+							Administrator
 						<?php } 
 						elseif ($this->session->userdata('login_perfil') == 2) { ?>
 							

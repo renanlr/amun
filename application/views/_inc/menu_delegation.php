@@ -1,7 +1,9 @@
 <?php
 $ci =& get_instance();
 $ci->load->model('usuario_model');
+$ci->load->model('delegacao_model');
 $user = $ci->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+$deleg = $ci->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'));
 ?>
 
 <div id="menu">
@@ -37,7 +39,18 @@ $user = $ci->usuario_model->buscarUsuarioPorId($this->session->userdata('login_i
 		font-weight: bold;
 		color: #FECB20;
 	">
-		Welcome,  <?php echo $user->nome; ?>
+		<p>Welcome,  <?php echo $user->nome; ?></p>
+	</div>
+
+	<div style="
+		position: absolute; 
+		right: 840px; 
+		top: -30px;
+		font-size: 20px;
+		font-weight: bold;
+		color: #FECB20;
+	">
+		<p><?php if($deleg != null) echo $deleg->qtd_integrantes.' delegates'; ?></p>
 	</div>
 </div>
 
