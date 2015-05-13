@@ -19,7 +19,7 @@ class Usuario extends CI_Controller {
         $senha = md5($this->input->post('senha'));
 
         $usuario = $this->usuario_model->buscarUsuario($login, $senha);
-        var_dump($usuario);
+        
         if (!$usuario) {
             $this->session->set_userdata('Alert','Invalid access!');
             redirect('usuario/login');
@@ -103,6 +103,23 @@ class Usuario extends CI_Controller {
         redirect('pagamento/payment');
     }
 
+    public function alterarDados(){
+        $this->load->model('usuario_model');
+        $dados = array(
+            'nome' => $this->input->post('name'),
+            'sobrenome' => $this->input->post('surName'),
+            'nome_cracha' => $this->input->post('badgeName'),
+            'senha' => md5($this->input->post('senha')),
+            'celular' => $this->input->post('cel'),
+            'cep' => $this->input->post('zip'),
+            'cidade' => $this->input->post('city'),
+            'estado' => $this->input->post('state'),
+            'identification' => $this->input->post('identification'),
+            );
+        $this->usuario_model->atualizarDados($this->session->userdata('login_id'),$dados);
+        redirect('usuario/home');
+    }
+
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 
     public function home() {
@@ -140,29 +157,15 @@ class Usuario extends CI_Controller {
         $this->load->view('usuario/meusDados',$dados);
     }
 
-    public function alterarDados(){
-        $this->load->model('usuario_model');
-        $dados = array(
-            'nome' => $this->input->post('name'),
-            'sobrenome' => $this->input->post('surName'),
-            'nome_cracha' => $this->input->post('badgeName'),
-            'senha' => md5($this->input->post('senha')),
-            'celular' => $this->input->post('cel'),
-            'cep' => $this->input->post('zip'),
-            'cidade' => $this->input->post('city'),
-            'estado' => $this->input->post('state'),
-            'identification' => $this->input->post('identification'),
-            );
-        $this->usuario_model->atualizarDados($this->session->userdata('login_id'),$dados);
-        redirect('usuario/home');
-    }
+    
 
     public function lista(){
         $this->load->model('usuario_model');
+        $this->load->model('pais_model');
 
-        $users = $this->usuario_model->buscarUsuarios();
-
-        die(var_dump($users));
+        $dados['paises'] = $this->pais_model->buscarPaises()->result();
+        $dados['users'] = $this->usuario_model->buscarUsuarios();
+        $this->load->view('usuario/lista',$dados);
     }
 }
 
