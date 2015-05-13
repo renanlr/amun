@@ -156,6 +156,14 @@ class Usuario extends CI_Controller {
         $this->usuario_model->atualizarDados($this->session->userdata('login_id'),$dados);
         redirect('usuario/home');
     }
+
+    public function lista(){
+        $this->load->model('usuario_model');
+
+        $users = $this->usuario_model->buscarUsuarios();
+
+        die(var_dump($users));
+    }
 }
 
 ?>

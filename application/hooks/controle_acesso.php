@@ -28,6 +28,7 @@ class Controle_Acesso {
         $permissao['usuario']['meusDados'] = array(0, 1, 2, 3);
         $permissao['usuario']['alterarDados'] = array(0, 1, 2, 3);
         $permissao['usuario']['alterarStatus'] = array(1, 2);
+        $permissao['usuario']['lista'] = array(3);
 
 		$permissao['form']['escolherOpcaoIndividual'] = array(1);
 		$permissao['form']['cadastroIndividual'] = array(1);
