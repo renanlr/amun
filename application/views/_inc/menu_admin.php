@@ -1,7 +1,12 @@
 <div id="menu">
 	<ul>
-		<li><a href="<?php echo base_url(); ?>index.php/usuario/listar">Usuários</a></li>
-
+		<li><a href="<?php echo base_url(); ?>index.php/responsavel/lista">Responsáveis</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/professor/lista">Professores</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/regiao/lista">Regiões</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/materia/lista">Matérias</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/produto/lista">Produtos</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/cupom/lista">Cupom</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/newsletter/envio">Newsletter</a></li>
 	</ul>
 	<div id="nav-loged">
 		<div><?php echo $this->session->userdata('nome_fantasia'); ?></div>

@@ -19,7 +19,7 @@ class Usuario extends CI_Controller {
         $senha = md5($this->input->post('senha'));
 
         $usuario = $this->usuario_model->buscarUsuario($login, $senha);
-
+        
         if (!$usuario) {
             $this->session->set_userdata('Alert','Invalid access!');
             redirect('usuario/login');
@@ -110,7 +110,7 @@ class Usuario extends CI_Controller {
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
 
         if ($this->session->userdata('login_perfil') == 3) {
-            $this->load->view('home/admin',$dados);
+            redirect('home/admin');
         } elseif ($this->session->userdata('login_perfil') == 2) {
             $this->load->view('home/delegation', $dados);
         } elseif ($this->session->userdata('login_perfil') == 1) {
@@ -155,16 +155,6 @@ class Usuario extends CI_Controller {
             );
         $this->usuario_model->atualizarDados($this->session->userdata('login_id'),$dados);
         redirect('usuario/home');
-    }
-
-    public function listar(){
-
-        $this->load->model('usuario_model');
-        $this->load->model('pais_model');
-        $dados['paises'] = $this->pais_model->buscarPaises()->result();
-        $dados['usuarios'] = $this->usuario_model->buscarUsuarios()->result();
-        $this->load->view('usuario/listagem',$dados);
-
     }
 }
 

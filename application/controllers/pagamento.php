@@ -63,9 +63,12 @@ class Pagamento extends CI_Controller {
             }
         }elseif ($user->tipo == 2) {
 
-            if ($user->status < 3) {
+            if ($user->status == 1) {
                 $this->session->set_userdata('Alert', 'You have steps to complete before payment.');
                 redirect('usuario/home');
+            }elseif($user->status == 2) {
+                $this->session->set_userdata('Alert', 'For the payment be unlocked choose your preferences of countries and click the "Proceed to payment" button.');
+                redirect('form/cadastroPaises');
             }elseif($user->status == 3){
                 $delegation = $this->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'));
                 if ($delegation->qtd_gratuidade == 0) {
@@ -77,7 +80,7 @@ class Pagamento extends CI_Controller {
                     $this->session->set_userdata('Alert', 'Please send e-mail to amun@amun.org.br with information (name , e- mail , cpf) of delegate who has gratuity. If you have already sent wait for confirmation.');
                     redirect('usuario/home');
                 }
-            }elseif($user->status == 4){
+            }elseif($user->status == 5){
                 $this->session->set_userdata('Alert', 'Please wait for your payment to be confirmed. Once it\'s confirmed, you will be informed by e-mail.');
                 redirect('usuario/home');
             }else{
