@@ -141,4 +141,7 @@ class Usuario_Model extends CI_Model {
         $this->db->where('idusuario',$id);
         $this->db->update('usuario',$dados);
     }
+    public function buscarUsuarios(){
+        return $this->db->get('usuario');
+    }
 }
