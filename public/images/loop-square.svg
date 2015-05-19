@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-loop-square" width="25" height="25" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Loop Square</title>
+  </g>
+  <g class="iconic-loop-square-sm iconic-container iconic-sm" data-width="16" data-height="12" display="inline" transform="scale(8) translate(0 2)">
+    <path stroke="#FECB20" stroke-width="2" d="M13 8v2.5c0 .276-.224.5-.5.5h-9c-.276 0-.5-.224-.5-.5v-3.5" class="iconic-loop-square-line iconic-loop-square-line-top iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-square-arrowhead iconic-loop-square-arrowhead-bottom iconic-property-fill" d="M3 5l3 3h-6z"  fill="#FECB20"/>
+    <path stroke="#FECB20" stroke-width="2" d="M3 4v-2.5c0-.276.224-.5.5-.5h9c.276 0 .5.224.5.5v3.5" class="iconic-loop-square-line iconic-loop-square-line-top iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-square-arrowhead iconic-loop-square-arrowhead-top iconic-property-fill" d="M13 7l-3-3h6z" fill="#FECB20"/>
+  </g>
+</svg>

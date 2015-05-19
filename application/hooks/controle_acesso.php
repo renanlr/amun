@@ -41,6 +41,8 @@ class Controle_Acesso {
 
         $permissao['pagamento']['payment'] = array(1, 2);
         $permissao['pagamento']['enviarComprovante'] = array(1, 2);
+        $permissao['pagamento']['lista'] = array(3);
+        $permissao['pagamento']['confirmarPagamento'] = array(3);
 
 
 		$ci =& get_instance();

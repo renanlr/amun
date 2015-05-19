@@ -42,7 +42,7 @@ International payments will be received through <span class="bold">Paypal</span>
 		<p style="  font-size: 17px;text-align: justify;">Please wait for your payment and your registration to be confirmed.</p>
 		<h4 style="color:#e4b928;">5-	Confirmation</h4>
 		<p style="  font-size: 17px;text-align: justify;">At this point you will receive confirmation that you are officially a participant at the 18th AMUN.<br><span class="bold"> Remember to constantly check our website and social media for further information.</span></p>
-
+		<h4 style="color:#e4b928;">If you have any doubts, please contact amun@amun.org.br</h4>
 	<?php } ?>
 	
 	

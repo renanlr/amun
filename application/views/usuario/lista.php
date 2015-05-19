@@ -51,12 +51,24 @@
 								}elseif ($usuario->status == 4) {
 									echo "Aguardando pagamento";
 								}elseif ($usuario->status == 5) {
-									echo "Aguardando confirmação de pagamento";
+									echo "<h5 style=\"color:red;\">Pagamento realizado, aguardando confirmação.</h5>";
 								}elseif ($usuario->status == 6) {
 									echo "Usuario inscrito";
 								}
 							}elseif ($usuario->tipo == 2) {
-								//status delegation
+								if ($usuario->status == 1) {
+									echo "Preenchendo o form";
+								}elseif ($usuario->status == 2) {
+									echo "Escolhendo Países";
+								}elseif ($usuario->status == 3) {
+									echo "Aguardando pagamento";
+								}elseif ($usuario->status == 4) {
+									echo "Aguardando confirmação de gratuidade";
+								}elseif ($usuario->status == 5) {
+									echo "<h5 style=\"color:red;\">Pagamento realizado, aguardando confirmação.</h5>";
+								}elseif ($usuario->status == 5) {
+									echo "Cadastrando Delegados";
+								}
 							}else{
 								echo "Administrator";
 							}
@@ -70,7 +82,7 @@
 		                    }; ?>
 						</td>
 						<td>
-							<a title="Excluir" onclick="if (confirm('Tem certeza que deseja excluir esta matÃ©ria?')) window.location.replace('<?php echo base_url(); ?>index.php/materia/excluir/');"><img src="<?php echo base_url(); ?>public/images/icon-delete.svg"></a>
+							<a title="Excluir" onclick="if (confirm('Tem certeza que deseja excluir este usuário?')) window.location.replace('<?php echo base_url(); ?>index.php/usuario/excluir/');"><img src="<?php echo base_url(); ?>public/images/icon-delete.svg"></a>
 						</td>
 					</tr>
 				<?php } ?>

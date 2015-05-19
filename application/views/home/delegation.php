@@ -12,8 +12,12 @@
 				echo "Please send delegation preferences of representation.";
 			} elseif ($status == 3) {
 				echo "Do the payment.";
+			} elseif ($status == 4) {
+				echo "Please, wait for gratuity confirmation.";
 			} elseif ($status == 5) {
 				echo "Please, wait for payment confirmation.";
+			} elseif ($status == 6) {
+				echo "Please, wait for confirmation of country representation.";
 			}else {
 				echo "Register Delegates";
 			}?>
@@ -38,6 +42,7 @@ At the following step, the delegation will be assigned the countries it will rep
 		<p style="  font-size: 17px;text-align: justify;">At this step, the head-delegate must enter the personal data of each one of the delegates composing the delegation. The committee each delegate will take part at should also be informed at this point.</p>
 		<h4 style="color:#e4b928;">7-	Confirmation</h4>
 		<p style="  font-size: 17px;text-align: justify;">At this point you will receive confirmation that you are officially a participant at the 18th AMUN. Remember to constantly check our website and social media for further information.</p>
+		<h4 style="color:#e4b928;">If you have any doubts, please contact amun@amun.org.br</h4>
 </div>
 
 

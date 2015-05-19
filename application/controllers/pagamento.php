@@ -28,7 +28,47 @@ class Pagamento extends CI_Controller {
     }
 
     public function base_img_dir(){
-        return './complemento/comprovantes';
+        return './complemento/com';
+    }
+
+    public function confirmarPagamento($id){
+        $this->load->model('usuario_model');
+
+        $dados['situacao_pagamento'] = 1;
+
+        if (!$this->usuario_model->atualizarDados($id,$dados)){
+            $this->session->set_userdata('Alert','Something went wrong!');
+            redirect('pagamento/lista');
+        }
+
+        $usuario = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+
+        if(!$usuario) {
+            $this->session->set_userdata('Alert', 'ERRO, a operação foi efetuada, porém o email não foi enviado, por favor envie o e-mail manualmente.');
+            redirect('pagamento/lista');
+        } else {
+
+            if ($usuario->tipo == 1) {
+                $emailsender = 'amun@amun.org.br';
+                $assunto = '[AMUN] Payment Confirmation';
+                $mensagem = "Hello, $usuario->nome! \r\n \r\n We have received the confirmation of your payment. \r\n We await you in 15th AMUN. \r\n";
+                $headers = 'From: amun@amun.org.br' . "\r\n" .
+                'Reply-To: amun@amun.org.br' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+                mail($usuario->email, $assunto, $mensagem, $headers, "-r".$emailsender);
+            }else{
+                $emailsender = 'amun@amun.org.br';
+                $assunto = '[AMUN] Payment Confirmation';
+                $mensagem = "Hello, $usuario->nome! \r\n \r\n We have received the confirmation of your payment. \r\n \r\n Please, wait for confirmation of country representation. \r\n";
+                $headers = 'From: amun@amun.org.br' . "\r\n" .
+                'Reply-To: amun@amun.org.br' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+                mail($usuario->email, $assunto, $mensagem, $headers, "-r".$emailsender);
+            }
+        }
+
+        $this->session->set_userdata('Alert','Sucesso, pagamento confirmado e email enviado!');
+        redirect('pagamento/lista');
     }
 
     public function calculaValorDelegacao($delegation){
@@ -88,6 +128,15 @@ class Pagamento extends CI_Controller {
                 redirect('usuario/home');
             }
         }
+    }
+
+    public function lista(){
+        $this->load->model('usuario_model');
+        $this->load->model('pais_model');
+
+        $dados['paises'] = $this->pais_model->buscarPaises()->result();
+        $dados['users'] = $this->usuario_model->buscarUsuarios();
+        $this->load->view('pagamento/lista',$dados);
     }
 }
 
