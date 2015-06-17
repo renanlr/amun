@@ -124,10 +124,12 @@ class Usuario extends CI_Controller {
 
     public function home() {
         $this->load->model('usuario_model');
+        $this->load->model('vagas_model');
         $dados = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+        $admin['vagas'] = $this->vagas_model->vagas();
 
         if ($this->session->userdata('login_perfil') == 3) {
-            $this->load->view('home/admin');
+            $this->load->view('home/admin', $admin);
         } elseif ($this->session->userdata('login_perfil') == 2) {
             $this->load->view('home/delegation', $dados);
         } elseif ($this->session->userdata('login_perfil') == 1) {
@@ -144,6 +146,8 @@ class Usuario extends CI_Controller {
     }
 
     public function cadastro() {
+        //$this->session->set_userdata('Alert','Hey there! Registrations are temporally closed. But they are not over: the second round of registrations will open on June 15th! Get ready and wait for it! Join us in the 18th AMUN!!!');
+        //redirect('pagamento/payment');
         $this->load->model('pais_model');
         $dados['paises'] = $this->pais_model->buscarPaises()->result();
         $this->load->view('usuario/cadastro',$dados);

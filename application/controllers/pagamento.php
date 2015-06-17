@@ -34,14 +34,12 @@ class Pagamento extends CI_Controller {
     public function confirmarPagamento($id){
         $this->load->model('usuario_model');
 
+        $usuario = $this->usuario_model->buscarUsuarioPorId($id);
+
         $dados['situacao_pagamento'] = 1;
+        $dados['status'] = 6;
 
-        if (!$this->usuario_model->atualizarDados($id,$dados)){
-            $this->session->set_userdata('Alert','Something went wrong!');
-            redirect('pagamento/lista');
-        }
-
-        $usuario = $this->usuario_model->buscarUsuarioPorId($this->session->userdata('login_id'));
+        $this->usuario_model->atualizarDados($id,$dados);
 
         if(!$usuario) {
             $this->session->set_userdata('Alert', 'ERRO, a operação foi efetuada, porém o email não foi enviado, por favor envie o e-mail manualmente.');
@@ -51,7 +49,7 @@ class Pagamento extends CI_Controller {
             if ($usuario->tipo == 1) {
                 $emailsender = 'amun@amun.org.br';
                 $assunto = '[AMUN] Payment Confirmation';
-                $mensagem = "Hello, $usuario->nome! \r\n \r\n We have received the confirmation of your payment. \r\n We await you in 15th AMUN. \r\n";
+                $mensagem = "Hello, ".$usuario->nome."! \r\n \r\nYour payment is now confirmed. \r\n \r\nYou are officially a participant on our conference. \r\nWelcome to the 18th AMUN, delegate! \r\nPlease, wait until the end of the First Round of Registrations (June 08th) to receive your representations and continue your registration process.\r\n \r\nBest regards,\r\n18th AMUN Secretariat";
                 $headers = 'From: amun@amun.org.br' . "\r\n" .
                 'Reply-To: amun@amun.org.br' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
@@ -59,7 +57,7 @@ class Pagamento extends CI_Controller {
             }else{
                 $emailsender = 'amun@amun.org.br';
                 $assunto = '[AMUN] Payment Confirmation';
-                $mensagem = "Hello, $usuario->nome! \r\n \r\n We have received the confirmation of your payment. \r\n \r\n Please, wait for confirmation of country representation. \r\n";
+                $mensagem = "Hello,".$usuario->nome."! \r\n \r\n We have received the confirmation of your payment. \r\n \r\n Please, wait for confirmation of country representation. \r\n";
                 $headers = 'From: amun@amun.org.br' . "\r\n" .
                 'Reply-To: amun@amun.org.br' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
@@ -72,7 +70,7 @@ class Pagamento extends CI_Controller {
     }
 
     public function calculaValorDelegacao($delegation){
-        return $delegation->qtd_integrantes * 175 + $delegation->qtd_pacotes * 85 - $delegation->qtd_gratuidade;
+        return $delegation->qtd_integrantes * 180 + $delegation->qtd_pacotes * 85; /*- $delegation->qtd_gratuidade;*/
     }
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 

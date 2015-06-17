@@ -28,8 +28,9 @@
             <?php }?>
                 <?php echo form_open('pagamento/enviarComprovante', 'class="form-professor" enctype="multipart/form-data" id="form"'); ?>
                     <span class="bold" style="color:red;">Value: R$<?php echo $valor ?>,00 <br></span>
-                    <span>CAREL AMUN<br></span>
+                    <span>CAREL UNB<br></span>
                     <span>Banco do Brasil <br></span>
+                    <span>CNPJ 01.275.310/0001-81<br></span>
                     <span>Ag.: 3603-X<br></span>
                     <span>C.C.: 36.703-6<br><br></span>
 

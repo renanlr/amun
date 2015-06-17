@@ -15,6 +15,8 @@ class Controle_Acesso {
 		$permissao['usuario'] = array();
         $permissao['form'] = array();
         $permissao['pagamento'] = array();
+        $permissao['delegacao'] = array();
+        $permissao['individual'] = array();
 
 		$permissao['usuario']['index'] = array(0, 1, 2, 3);
 		$permissao['usuario']['logar'] = array(0, 1, 2, 3);
@@ -43,6 +45,14 @@ class Controle_Acesso {
         $permissao['pagamento']['enviarComprovante'] = array(1, 2);
         $permissao['pagamento']['lista'] = array(3);
         $permissao['pagamento']['confirmarPagamento'] = array(3);
+
+        $permissao['delegacao']['lista'] = array(3);
+        $permissao['delegacao']['listaPreferencias'] = array(3);
+        $permissao['delegacao']['cadastrarPaises'] = array(3);
+
+        $permissao['individual']['selecionarTipo'] = array(3);
+        $permissao['individual']['listaPress'] = array(3);
+        $permissao['individual']['listaIcty'] = array(3);
 
 
 		$ci =& get_instance();

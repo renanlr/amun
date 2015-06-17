@@ -3,6 +3,8 @@
 <div class="content-box" style="text-align:center;">
 	<div class="titulo">Administrator</div>
 	<h1>Bem-Vindo</h1>
+	<span>Vagas</span>
+	<?php //var_dump($vagas)?>
 	<h3>Aqui podemos colocar instruções sobre como usar o sistema</h3>
 </div>
 
