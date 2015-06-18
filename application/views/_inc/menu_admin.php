@@ -1,8 +1,8 @@
 <div id="menu">
 	<ul>
 		<li><a href="<?php echo base_url(); ?>index.php/usuario/lista">Users</a></li>
-		<li><a href="<?php echo base_url(); ?>index.php/">Individual</a></li>
-		<li><a href="<?php echo base_url(); ?>index.php/">Delegation</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/individual/selecionarTipo">Individual</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/delegacao/lista">Delegation</a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/pagamento/lista">Payment</a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/">Committees</a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/">Countries</a></li>

@@ -41,7 +41,7 @@
 		                    }; ?>
 						</td>
 						<td>
-							<a title="Confirmar pagamento" onclick="if (confirm('Tem certeza que deseja alterar o status do pagamento de <?php echo $usuario->nome." ".$usuario->sobrenome; ?>  ?')) window.location.replace('<?php echo base_url(); ?>index.php/pagamento/confirmarPagamento/<?php echo $usuario->idusuario ?>');"><img src="<?php echo base_url(); ?>public/images/loop-square.svg"></a>
+							<a title="Confirmar pagamento" onclick="if (confirm('Tem certeza que deseja confirmar o pagamento de <?php echo $usuario->nome." ".$usuario->sobrenome; ?>  ?')) window.location.replace('<?php echo base_url(); ?>index.php/pagamento/confirmarPagamento/<?php echo $usuario->idusuario ?>');"><img src="<?php echo base_url(); ?>public/images/loop-square.svg"></a>
 						</td>
 					</tr>
 				<?php } ?>

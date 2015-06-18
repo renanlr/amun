@@ -110,17 +110,17 @@ class Usuario_Model extends CI_Model {
         $this->db->where('pa_idusuario',$id);
         if($this->db->get('individual_pa')->row()) {
             if ($this->db->get('individual_pa')->row()->social_events) {
-                return 235;
+                return 265;
             } else {
-                return 150;
+                return 180;
             }
         }
         $this->db->where('icty_idusuario',$id);
         if($this->db->get('individual_icty')->row()){
             if ($this->db->get('individual_icty')->row()->social_events) {
-                return 260;
+                return 265;
             } else {
-                return 175;
+                return 180;
             }
         }
         return FALSE;
