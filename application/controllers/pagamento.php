@@ -16,6 +16,10 @@ class Pagamento extends CI_Controller {
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
         $extensao = strrchr($_FILES['foto']['name'],'.');
+        if ($extensao != ".jpg" && $extensao != ".png") {
+            $this->session->set_userdata('Alert','Just png and jpg are extensions accepted!');
+            redirect('usuario/home');
+        }
         $_FILES['foto']['name'] = md5(microtime()).'_'.$this->session->userdata('login_id').$extensao;
         $this->upload->do_upload('foto');
         $picture = $this->upload->data();
@@ -87,7 +91,6 @@ class Pagamento extends CI_Controller {
                 redirect('usuario/home');
             }elseif(($user->status)==4) {
                 if ($this->usuario_model->estrangeiro($this->session->userdata('login_id'))) {
-
                     $this->load->view('pagamento/paypal');
                 } else {
                     $dados['valor'] = $this->usuario_model->retornaValorInsFesta($this->session->userdata('login_id'));
@@ -138,6 +141,14 @@ class Pagamento extends CI_Controller {
         $dados['users'] = $this->usuario_model->buscarUsuarios();
         $this->load->view('pagamento/lista',$dados);
     }
+
+    public function payment_paypal(){
+        $this->load->library('merchant');
+        $this->merchant->load('paypal_express');
+        $settings = $this->merchant->default_settings();
+        $this->merchant->initialize($settings);
+    }
+
 }
 
 ?>
