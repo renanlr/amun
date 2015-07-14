@@ -73,6 +73,43 @@ class Delegacao extends CI_Controller {
         }
     }
 
+    public function cadastrarDelegado(){
+        $this->load->model('delegacao_model');
+        $this->load->model('delegado_model');
+
+        $delegacao = $this->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userdata('login_id'));
+
+        $data = array(
+            'nome' => $this->input->post('name'),
+            'nome_cracha' => $this->input->post('badgeName'),
+            'email' => $this->input->post('email'),
+            'celular' => $this->input->post('cel'),
+            'Comite_has_paises_id' => $this->input->post('representation'),
+            'identification' => $this->input->post('identification'),
+            'facebook' => $this->input->post('facebook'),
+            'delegacao_iddelegacao' => $delegacao->iddelegacao
+        );
+
+        if($data['Comite_has_paises_id'] == 0 ){
+            $this->session->set_userdata('Alert', 'Choose a valid representation.');
+            redirect('delegacao/cadastroDelegado');
+        }
+        $this->delegado_model->inserirDelegado($data);
+        $this->session->set_userdata('Alert', 'Thanks, delegate registered!');
+        redirect('delegacao/listaDelegados');
+
+    }
+
+    public function excluirDelegado($id){
+        $this->load->model('delegado_model');
+        if (!$this->delegado_model->excluirDelegado($id)) {
+            $this->session->set_userdata('Alert', 'Something went wrong, please try again.');
+        } else {
+            $this->session->set_userdata('Alert', 'Success.');
+        }
+        redirect('delegacao/listaDelegados');
+
+    }
     /// MÉTODOS DE CARREGAMENTO DE PÁGINAS ------------------------------------
 
     public function lista(){
@@ -101,6 +138,39 @@ class Delegacao extends CI_Controller {
         $dados['delegacao'] = $delegacao[0];
 
         $this->load->view('delegacao/listaPreferencias',$dados);
+    }
+
+    public function listaDelegados(){
+        $this->load->model('delegado_model');
+        $this->load->model('delegacao_model');
+
+        $representations = $this->delegado_model->buscarDelegadosPorIdUsuario($this->session->userdata('login_id'));
+
+        $representationsFinal = array();
+        foreach($representations as $r){
+            $r->strRepresentation = $this->delegado_model->montarStringRepresentacao($r->Comite_has_paises_id);
+            array_push($representationsFinal,$r);
+        }
+
+        $dados['delegados'] = $representationsFinal;
+
+        $this->load->view('delegacao/listaDelegados',$dados);
+    }
+
+    public function cadastroDelegado(){
+        $this->load->model('delegado_model');
+        $this->load->model('delegacao_model');
+
+        if(!$this->delegado_model->podeCadastrarDelegado($this->session->userdata('login_id'))){
+            $this->session->set_userdata('Alert','All delegates have already been registered. If you want to register another delegate or change any representation, you may delete them so you\'ll be able to register delegates again.');
+            redirect('delegacao/listaDelegados');
+        } else {
+            $dados['representations'] = $this->delegado_model->montarListaDeRepresentacao($this->session->userdata('login_id'));
+
+            $this->load->view('delegacao/cadastroDelegado',$dados);
+        }
+
+
     }
 }
 

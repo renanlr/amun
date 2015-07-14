@@ -49,6 +49,10 @@ class Controle_Acesso {
         $permissao['delegacao']['lista'] = array(3);
         $permissao['delegacao']['listaPreferencias'] = array(3);
         $permissao['delegacao']['cadastrarPaises'] = array(3);
+		$permissao['delegacao']['listaDelegados'] = array(2);
+		$permissao['delegacao']['cadastroDelegado'] = array(2);
+		$permissao['delegacao']['cadastrarDelegado'] = array(2);
+		$permissao['delegacao']['excluirDelegado'] = array(2);
 
         $permissao['individual']['selecionarTipo'] = array(3);
         $permissao['individual']['listaPress'] = array(3);

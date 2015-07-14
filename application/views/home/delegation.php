@@ -18,9 +18,12 @@
 				echo "Please, wait for payment confirmation.";
 			} elseif ($status == 6) {
 				echo "Please, wait for confirmation of country representation.";
-			}else {
-				echo "Register Delegates";
-			}?>
+			} elseif ($status == 7) {
+				echo "Register Delegates.";
+			} else {
+				echo "Oh yesss you";
+			}
+			?>
 		</div>
 
 		<div style="  font-size: 28px;font-weight: bold;">Understand our registration proccess step-by-step:</div>

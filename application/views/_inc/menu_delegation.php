@@ -16,7 +16,7 @@ $deleg = $ci->delegacao_model->buscarDelegacaoPorIdUsuario($this->session->userd
 		<li><a href="<?php echo base_url(); ?>index.php/form/cadastroPaises">></a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/pagamento/payment">Payment</a></li>
 		<li><a href="<?php echo base_url(); ?>index.php/pagamento/payment">></a></li>
-		<li><a href="<?php echo base_url(); ?>index.php/usuario/home">Delegates registration</a></li>
+		<li><a href="<?php echo base_url(); ?>index.php/delegacao/listaDelegados">Delegates registration</a></li>
 	</ul>
 	<div id="nav-loged">
 		<div><?php echo $this->session->userdata('nome_fantasia'); ?></div>
