@@ -21,7 +21,7 @@
 			} elseif ($status == 7) {
 				echo "Register Delegates.";
 			} else {
-				echo "Oh yesss you";
+				echo "Oh yesss its over, you're registered in AMUN.";
 			}
 			?>
 		</div>
